@@ -5,6 +5,7 @@ import ru.ssau.patterns_example.сommand.ICommand;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class Auto implements Transport, Serializable, Cloneable {
     private String mark;
@@ -156,6 +157,10 @@ public class Auto implements Transport, Serializable, Cloneable {
         this.command = command;
     }
 
+    public java.util.Iterator<Model> iterator() {
+        return new AutoIterator<Model>(this.models);
+    }
+
     //lab4
     @Override
     public String toString() {
@@ -213,7 +218,7 @@ public class Auto implements Transport, Serializable, Cloneable {
         return result;
     }
 
-    private class Model implements Serializable, Cloneable {
+    static class Model implements Serializable, Cloneable {
         private String name;
         private double cost;
 
@@ -261,6 +266,39 @@ public class Auto implements Transport, Serializable, Cloneable {
             result = prime * result + ((name == null) ? 0 : name.hashCode());
             result = prime * result + ((cost == 0.0) ? 0 : Double.valueOf(cost).hashCode());
             return result;
+        }
+
+        @Override
+        public String toString() {
+            return this.name + " " + this.cost;
+        }
+    }
+
+    private class AutoIterator<T> implements java.util.Iterator<T> {
+
+        private int currentIndex = 0;
+        private T[] models;
+
+        public AutoIterator(final T[] models) {
+            this.models = models;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (currentIndex < models.length) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            int i = currentIndex;
+            if (i >= models.length) {
+                throw new NoSuchElementException();
+            }
+            currentIndex++;
+            return models[i];
         }
     }
 }
