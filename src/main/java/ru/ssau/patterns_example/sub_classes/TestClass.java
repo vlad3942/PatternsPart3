@@ -12,8 +12,6 @@ public class TestClass {
             Class c = ts.getClass();
             Constructor constructor = c.getConstructor(new Class[] {String.class, int.class});
             Transport res = (Transport) constructor.newInstance(mark, count);
-            //System.out.println("Метка");
-            //Movable res = (Movable) c.getConstructor(new Class[] {String.class, int.class}).newInstance(mark, count);
             return res;
         } catch (NoSuchMethodException ex) {
             return null;
@@ -56,8 +54,6 @@ public class TestClass {
             }
         } catch (NoSuchModelNameException ex) {
             System.out.println("Странным образом поймали исключение - " + ex.getLocalizedMessage());
-        } finally {
-            //System.out.println("finally не дремлет и всегда работает =)");
         }
     }
     //Тоже вывод но без Exceptions
@@ -81,11 +77,9 @@ public class TestClass {
     public static void outputMovable(Transport v, OutputStream out) throws IOException {
         DataOutputStream dos = new DataOutputStream(out);
         byte[] temp = v.getMark().getBytes();
-        //int markLen = v.getMark().length();
         //Записываем int - длинну строки, используем перегрузку метода для int
         dos.writeInt(temp.length);
         //Записываем сторку как массив байтов
-        //dos.write(mark);
         for(int i = 0; i < temp.length; i++) {
             dos.writeByte(temp[i]);
         }

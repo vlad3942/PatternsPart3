@@ -1,11 +1,16 @@
 package ru.ssau.patterns_example.sub_classes;
 
+import ru.ssau.patterns_example.сommand.ICommand;
+
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 
 public class Auto implements Transport, Serializable, Cloneable {
     private String mark;
     private Model[] models;
+
+    private ICommand command;
 
     public Auto(String mark, int numberOfModels) {
         this.mark = mark;
@@ -106,9 +111,7 @@ public class Auto implements Transport, Serializable, Cloneable {
             while ((i < len) && (!models[i].name.equals(name)))
                 i++;
             if (i < len) {
-                for(int j = i; j < len - 1; j++) {
-                    models[j] = models[j + 1];
-                }
+                if (len - 1 - i >= 0) System.arraycopy(models, i + 1, models, i, len - 1 - i);
                 models = Arrays.copyOf(models, len - 1);
             } else {
                 throw new NoSuchModelNameException(name);
@@ -143,7 +146,18 @@ public class Auto implements Transport, Serializable, Cloneable {
         }
     }
 
+    //В классе Автомобиль описать метод print(),
+    //которому в качестве параметра передавать поток, куда должна производиться печать.
+    public void print(FileOutputStream os) {
+        command.execute(os);
+    }
+
+    public void setPrintCommand(ICommand command) {
+        this.command = command;
+    }
+
     //lab4
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(getMark());
@@ -158,6 +172,7 @@ public class Auto implements Transport, Serializable, Cloneable {
         return sb.toString();
     }
 
+    @Override
     public boolean equals(Object obj) {
         if(obj != null && obj != this && obj instanceof Transport) {
             Transport m = (Transport) obj;
@@ -175,6 +190,7 @@ public class Auto implements Transport, Serializable, Cloneable {
         return false;
     }
 
+    @Override
     public Object clone() throws CloneNotSupportedException {
         Auto res = null;
         res = (Auto) super.clone();
@@ -186,6 +202,7 @@ public class Auto implements Transport, Serializable, Cloneable {
         return res;
     }
 
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
