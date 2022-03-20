@@ -2,8 +2,7 @@ package ru.ssau.patterns_example.sub_classes;
 
 import ru.ssau.patterns_example.сommand.ICommand;
 
-import java.io.FileOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -161,6 +160,19 @@ public class Auto implements Transport, Serializable, Cloneable {
         return new AutoIterator<Model>(this.models);
     }
 
+    public synchronized AutoMemento createMemento() {
+        final AutoMemento autoMemento = new AutoMemento();
+        autoMemento.setAuto(this);
+        return autoMemento;
+    }
+
+    public synchronized void setMemento(final AutoMemento memento) {
+        final Auto auto = memento.getAuto();
+        this.mark = auto.mark;
+        this.models = auto.models;
+        this.command = auto.command;
+    }
+
     //lab4
     @Override
     public String toString() {
@@ -299,6 +311,41 @@ public class Auto implements Transport, Serializable, Cloneable {
             }
             currentIndex++;
             return models[i];
+        }
+    }
+
+    public static class AutoMemento {
+        private byte[] autoBytes;
+
+        private void setAuto(final Auto auto) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+                oos.writeObject(auto);
+                this.autoBytes = baos.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        private Auto getAuto() {
+            if (autoBytes == null) {
+                throw new IllegalStateException("Inner state of memento is null");
+            }
+            try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(autoBytes))) {
+                Auto auto = (Auto) ois.readObject();
+                if (auto == null) {
+                    throw new IllegalStateException("Object Reading Error");
+                }
+                return auto;
+            } catch (ClassNotFoundException | IOException e) {
+                throw new IllegalStateException("Something was wrong.", e);
+            }
         }
     }
 }
