@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <student lastname="Годнов">
+        <subject title="Физика" mark="5" />
+        <subject title="Химия" mark="4"/>
+        <subject title="Математика" mark="5"/>
+        <subject title="Геометрия" mark="5"/>
+        <subject title="Информатика" mark="5"/>
+        <subject title="История" mark="4"/>
+        <average>5</average>
+    </student>
+    <student lastname="Негоднов">
+        <subject title="Физика" mark="3" />
+        <subject title="Химия" mark="3"/>
+        <subject title="Математика" mark="4"/>
+        <subject title="Геометрия" mark="3"/>
+        <subject title="Информатика" mark="4"/>
+        <subject title="История" mark="4"/>
+        <average>4</average>
+    </student>
+    <student lastname="Готов">
+        <subject title="Физика" mark="5" />
+        <subject title="Химия" mark="5"/>
+        <subject title="Математика" mark="5"/>
+        <subject title="Геометрия" mark="5"/>
+        <subject title="Информатика" mark="5"/>
+        <subject title="История" mark="5"/>
+        <average>2</average>
+    </student>
+    <student lastname="Неготов">
+        <subject title="Физика" mark="2" />
+        <subject title="Химия" mark="2"/>
+        <subject title="Математика" mark="3"/>
+        <subject title="Геометрия" mark="3"/>
+        <subject title="Информатика" mark="3"/>
+        <subject title="История" mark="2"/>
+        <average>2</average>
+    </student>
+</root>

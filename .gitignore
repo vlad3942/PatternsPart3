@@ -1,2 +1,6 @@
 .idea/
 *.iml
+/target/
+/CoR.txt
+/inColumn.txt
+/inLine.txt
