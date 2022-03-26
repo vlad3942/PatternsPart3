@@ -1,5 +1,7 @@
 package ru.ssau.patterns_example.sub_classes;
 
+import ru.ssau.patterns_example.visitor.Visitor;
+
 public interface Transport {
 
     String getMark();
@@ -21,4 +23,6 @@ public interface Transport {
     int getModelsLength();
 
     void setModelName(String name, String name1) throws NoSuchModelNameException, DuplicateModelNameException;
+
+    void accept(Visitor visitor);
 }

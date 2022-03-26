@@ -1,5 +1,7 @@
 package ru.ssau.patterns_example.sub_classes;
 
+import ru.ssau.patterns_example.visitor.Visitor;
+
 import java.io.Serializable;
 
 public class Moto implements Transport, Serializable, Cloneable {
@@ -147,6 +149,11 @@ public class Moto implements Transport, Serializable, Cloneable {
                 throw new NoSuchModelNameException(name1);
             }
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     //lab4

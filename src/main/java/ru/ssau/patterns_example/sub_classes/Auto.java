@@ -1,5 +1,6 @@
 package ru.ssau.patterns_example.sub_classes;
 
+import ru.ssau.patterns_example.visitor.Visitor;
 import ru.ssau.patterns_example.сommand.ICommand;
 
 import java.io.*;
@@ -144,6 +145,11 @@ public class Auto implements Transport, Serializable, Cloneable {
                 throw new NoSuchModelNameException(name1);
             }
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     //В классе Автомобиль описать метод print(),
