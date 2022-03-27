@@ -1,13 +1,13 @@
 package ru.ssau.patterns_example.memento;
 
 import ru.ssau.patterns_example.sub_classes.Auto;
-import ru.ssau.patterns_example.sub_classes.AutoUtils;
+import ru.ssau.patterns_example.sub_classes.TransportUtils;
 import ru.ssau.patterns_example.sub_classes.DuplicateModelNameException;
 import ru.ssau.patterns_example.sub_classes.NoSuchModelNameException;
 
 public class MementoMainTest {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException {
-        final Auto auto = AutoUtils.initAuto();
+        final Auto auto = TransportUtils.initAuto();
         System.out.println("Create ->");
         System.out.println(auto);
         System.out.println("Saving state...");

@@ -1,9 +1,7 @@
 package ru.ssau.patterns_example.сommand;
 
 import ru.ssau.patterns_example.sub_classes.Auto;
-import ru.ssau.patterns_example.sub_classes.AutoUtils;
-import ru.ssau.patterns_example.sub_classes.DuplicateModelNameException;
-import ru.ssau.patterns_example.sub_classes.Transport;
+import ru.ssau.patterns_example.sub_classes.TransportUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +18,7 @@ public class MainCommandTest {
                 FileOutputStream columnOut = new FileOutputStream(inColumnFile);
                 FileInputStream columnIn = new FileInputStream(inColumnFile)
         ) {
-            Auto auto = AutoUtils.initAuto();
+            Auto auto = TransportUtils.initAuto();
             ICommand command = new PrintInLineCommand(auto);
             auto.setPrintCommand(command);
             System.out.println("Printing auto in file as line...");
