@@ -303,10 +303,7 @@ public class Auto implements Transport, Serializable, Cloneable {
 
         @Override
         public boolean hasNext() {
-            if (currentIndex < models.length) {
-                return true;
-            }
-            return false;
+            return currentIndex < models.length;
         }
 
         @Override

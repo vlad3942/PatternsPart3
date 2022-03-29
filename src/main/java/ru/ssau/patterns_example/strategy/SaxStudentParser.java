@@ -116,8 +116,8 @@ public class SaxStudentParser implements StudentXMLDocumentParser {
 
             if (qName.equalsIgnoreCase("average")) {
                 final String val = currentValue.toString();
-                long avg = Long.parseLong(val);
-                long avgRes = Math.round(sum / counter);
+                double avg = Long.parseLong(val);
+                double avgRes = sum / counter;
                 if (avgRes != avg) {
                     System.out.println("file average: " + avg);
                     System.out.println("calculated average: " + avgRes);

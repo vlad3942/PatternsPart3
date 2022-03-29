@@ -52,7 +52,7 @@ public class DomStudentParser implements StudentXMLDocumentParser{
                     String lastname = student.getAttribute("lastname");
                     System.out.println("Студент: " + lastname);
 
-                    int avg = Integer.parseInt(student.getElementsByTagName("average").item(0).getTextContent());
+                    double avg = Integer.parseInt(student.getElementsByTagName("average").item(0).getTextContent());
                     System.out.println("Средняя оценка: " + avg);
 
                     NodeList subjects = student.getElementsByTagName("subject");
@@ -68,7 +68,7 @@ public class DomStudentParser implements StudentXMLDocumentParser{
                             sum += mark;
                         }
                     }
-                    long avgReal = Math.round(sum / subjects.getLength());
+                    double avgReal = sum / subjects.getLength();
                     System.out.println("Посчитанная стредняя: " + avgReal);
 
                     if (avg != avgReal) {
